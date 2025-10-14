@@ -25,6 +25,7 @@ state_names = [
 ]
 
 # make directory for pdfs 
+logging.info("Making directories.")
 os.makedirs("2018_pdfs", exist_ok=True)
 os.makedirs("2019_pdfs", exist_ok=True)
 os.makedirs("2020_pdfs", exist_ok=True)
@@ -40,25 +41,24 @@ for y in range(2018, 2021):
         # make output path from directory and state name
         out_path = f"{y}_pdfs/{state}.pdf"
 
-        # skip already-downloaded files
-        if not os.path.exists(out_path):  
-            try:
-                # log state name
-                logging.info(f"Downloading {y} {state}")
-                # get pdf
-                r = requests.get(url, timeout=20)
-                if r.status_code == 200:
-                    with open(out_path, "wb") as f:
-                        f.write(r.content)
-                # if not work, log error
-                else:
-                    logging.info(f"Failed to download {y} {state}: {r.status_code}")
-            # if error, log error
-            except Exception as e:
-                logging.info(f"Error with {y} {state}: {e}")
+        # downloading 
+        try:
+            # log state name
+            logging.info(f"Downloading {y} {state}")
+            # get pdf
+            r = requests.get(url, timeout=20)
+            if r.status_code == 200:
+                with open(out_path, "wb") as f:
+                    f.write(r.content)
+            # if not work, log error
+            else:
+                logging.info(f"Failed to download {y} {state}: {r.status_code}")
+        # if error, log error
+        except Exception as e:
+            logging.info(f"Error with {y} {state}: {e}")
     # pause for 30 seconds and print year
     time.sleep(30)
-    print(f"Finished {yr}")
+    print(f"Finished {y}")
 
 ########## different url for 2021 and 2022 reports 
 late_base = "https://reports.collegeboard.org/media/pdf/{year}-{state}-sat-suite-of-assessments-annual-report.pdf"
@@ -71,22 +71,21 @@ for y in range(2021, 2023):
         # make output path from directory and state name
         out_path = f"{y}_pdfs/{state}.pdf"
 
-        # skip already-downloaded files
-        if not os.path.exists(out_path):  
-            try:
-                # log state name
-                logging.info(f"Downloading {y} {state}")
-                # get pdf
-                r = requests.get(url, timeout=20)
-                if r.status_code == 200:
-                    with open(out_path, "wb") as f:
-                        f.write(r.content)
-                # if not work, log error
-                else:
-                    logging.info(f"Failed to download {y} {state}: {r.status_code}")
-            # if error, log error
-            except Exception as e:
-                logging.info(f"Error with {y} {state}: {e}")
+        # downloading 
+        try:
+            # log state name
+            logging.info(f"Downloading {y} {state}")
+            # get pdf
+            r = requests.get(url, timeout=20)
+            if r.status_code == 200:
+                with open(out_path, "wb") as f:
+                    f.write(r.content)
+            # if not work, log error
+            else:
+                logging.info(f"Failed to download {y} {state}: {r.status_code}")
+        # if error, log error
+        except Exception as e:
+            logging.info(f"Error with {y} {state}: {e}")
     # pause for 30 seconds and print year 
     time.sleep(30)
-    print(f"Finished {yr}")
+    print(f"Finished {y}")

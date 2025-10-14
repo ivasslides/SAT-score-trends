@@ -68,14 +68,14 @@ def analytics():
                 Name VARCHAR, Abbr CHAR(2), Region VARCHAR);
 
                 INSERT INTO state_info VALUES 
-                ('alabama', 'AL', 'South'), ('alaska', 'AK', 'West'), ('arizona', 'AZ', 'West'), ('arkansas', 'AR', 'South'), ('california', 'CA', 'West'), ('colorado', 'CO', 'West'), ('connecticut', 'CT', 'Northeast'), 
-                ('delaware', 'DE', 'Northeast'), ('florida', 'FL', 'South'), ('georgia', 'GA', 'South'), ('hawaii', 'HI', 'West'), ('idaho', 'ID', 'West'), ('illinois', 'IL', 'Midwest'), ('indiana', 'IN', 'Midwest'),  
-                ('iowa', 'IA', 'Midwest'), ('kansas', 'KS', 'Midwest'), ('kentucky', 'KY', 'South'), ('louisiana', 'LA', 'South'), ('maine', 'ME', 'Northeast'), ('maryland', 'MD', 'Northeast'), ('massachusetts', 'MA', 'Northeast'),
-                ('michigan', 'MI', 'Midwest'), ('minnesota', 'MN', 'Midwest'), ('mississippi', 'MS', 'South'), ('missouri', 'MO', 'Midwest'), ('montana', 'MT', 'West'), ('nebraska', 'NE', 'Midwest'), ('nevada', 'NV', 'West'), 
-                ('new-hampshire', 'NH', 'Northeast'), ('new-jersey', 'NJ', 'Northeast'), ('new-mexico', 'NM', 'West'), ('new-york', 'NY', 'Northeast'), ('north-carolina', 'NC', 'South'), ('north-dakota', 'ND', 'Midwest'), 
-                ('ohio', 'OH', 'Midwest'), ('oklahoma', 'OK', 'South'), ('oregon', 'OR', 'West'), ('pennsylvania', 'PA', 'Northeast'), ('rhode-island', 'RI', 'Northeast'), ('south-carolina', 'SC', 'South'), ('south-dakota', 'SD', 'Midwest'),
-                ('tennessee', 'TN', 'South'), ('texas', 'TX', 'South'), ('utah', 'UT', 'West'), ('vermont', 'VT', 'Northeast'), ('virginia', 'VA', 'South'), ('washington', 'WA', 'West'), ('west-virginia', 'WV', 'South'), 
-                ('wisconsin', 'WI', 'Midwest'), ('wyoming', 'WY', 'West'); 
+                ('Alabama', 'AL', 'South'), ('Alaska', 'AK', 'West'), ('Arizona', 'AZ', 'West'), ('Arkansas', 'AR', 'South'), ('California', 'CA', 'West'), ('Colorado', 'CO', 'West'), ('Connecticut', 'CT', 'Northeast'), 
+                ('Delaware', 'DE', 'Northeast'), ('Florida', 'FL', 'South'), ('Georgia', 'GA', 'South'), ('Hawaii', 'HI', 'West'), ('Idaho', 'ID', 'West'), ('Illinois', 'IL', 'Midwest'), ('Indiana', 'IN', 'Midwest'),  
+                ('Iowa', 'IA', 'Midwest'), ('Kansas', 'KS', 'Midwest'), ('Kentucky', 'KY', 'South'), ('Louisiana', 'LA', 'South'), ('Maine', 'ME', 'Northeast'), ('Maryland', 'MD', 'Northeast'), ('Massachusetts', 'MA', 'Northeast'),
+                ('Michigan', 'MI', 'Midwest'), ('Minnesota', 'MN', 'Midwest'), ('Mississippi', 'MS', 'South'), ('Missouri', 'MO', 'Midwest'), ('Montana', 'MT', 'West'), ('Nebraska', 'NE', 'Midwest'), ('Nevada', 'NV', 'West'), 
+                ('New Hampshire', 'NH', 'Northeast'), ('New Jersey', 'NJ', 'Northeast'), ('New Mexico', 'NM', 'West'), ('New York', 'NY', 'Northeast'), ('North Carolina', 'NC', 'South'), ('North Dakota', 'ND', 'Midwest'), 
+                ('Ohio', 'OH', 'Midwest'), ('Oklahoma', 'OK', 'South'), ('Oregon', 'OR', 'West'), ('Pennsylvania', 'PA', 'Northeast'), ('Rhode Island', 'RI', 'Northeast'), ('South Carolina', 'SC', 'South'), ('South Dakota', 'SD', 'Midwest'),
+                ('Tennessee', 'TN', 'South'), ('Texas', 'TX', 'South'), ('Utah', 'UT', 'West'), ('Vermont', 'VT', 'Northeast'), ('Virginia', 'VA', 'South'), ('Washington', 'WA', 'West'), ('West Virginia', 'WV', 'South'), 
+                ('Wisconsin', 'WI', 'Midwest'), ('Wyoming', 'WY', 'West'); 
 
                 ALTER TABLE total_test_takers ADD COLUMN Abbr CHAR(2);
                 ALTER TABLE total_test_takers ADD COLUMN Region VARCHAR;

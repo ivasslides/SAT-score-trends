@@ -39,7 +39,12 @@ def convert_to_csv():
     files = [files_2018, files_2019, files_2020, files_2021, files_2022]
     years = [2018, 2019, 2020, 2021, 2022]
 
-    print("starting up...")
+    print("Starting up...")
+
+    # creating subdirectory for csv files 
+    output_dir = "data"
+    os.makedirs(output_dir, exist_ok=True)
+
     # for all years and files, 
     for yr, y_files in zip(years, files):
         # create empty df
@@ -118,6 +123,10 @@ def convert_to_csv():
                 df['State'] = state
                 df['Year'] = yr
 
+                # remove dashes and capitzalize first letters 
+                df['State'] = df['State'].str.replace('-', ' ')
+                df['State'] = df['State'].str.title() 
+
                 # append to giant table
                 all_tables.append(df) 
                 
@@ -129,8 +138,10 @@ def convert_to_csv():
 
         # combine into big df 
         final_df = pd.concat(all_tables, ignore_index=True)
-        # export to csv 
-        final_df.to_csv(f"{yr}_averages.csv", index=False)
+        # create output path 
+        output_path = os.path.join(output_dir, f"{yr}_averages.csv")
+        # export to csv using output path 
+        final_df.to_csv(output_path, index=False)
         print(f"Finished {yr}")
 
 # ********************************************
@@ -144,13 +155,12 @@ def upload():
         # create and verify connection 
         con = duckdb.connect(database='sat_data.db', read_only=False) 
         logger.info("Connected to duckdb instance") 
-        print("Connected to duckdb instance")
 
         # loading 2018 into duckdb
         con.execute(f"""
             DROP TABLE IF EXISTS averages_2018;
             CREATE TABLE averages_2018 AS
-            SELECT * FROM read_csv("./2018_averages.csv");
+            SELECT * FROM read_csv("./data/2018_averages.csv");
         """)
         logging.info("Successfully loaded 2018 averages.")
         
@@ -158,7 +168,7 @@ def upload():
         con.execute(f"""
             DROP TABLE IF EXISTS averages_2019;
             CREATE TABLE averages_2019 AS 
-            SELECT * from read_csv("./2019_averages.csv");
+            SELECT * from read_csv("./data/2019_averages.csv");
         """)
         logging.info("Successfully loaded 2019 averages.")
 
@@ -166,7 +176,7 @@ def upload():
         con.execute(f"""
             DROP TABLE IF EXISTS averages_2020;
             CREATE TABLE averages_2020 AS
-            SELECT * from read_csv("./2020_averages.csv");
+            SELECT * from read_csv("./data/2020_averages.csv");
         """)
         logging.info("Successfully loaded 2020 averages.")
 
@@ -174,7 +184,7 @@ def upload():
         con.execute(f"""
             DROP TABLE IF EXISTS averages_2021;
             CREATE TABLE averages_2021 AS
-            SELECT * FROM read_csv("./2021_averages.csv");
+            SELECT * FROM read_csv("./data/2021_averages.csv");
         """)
         logging.info("Successfully loaded 2021 averages.")
 
@@ -182,9 +192,10 @@ def upload():
         con.execute(f"""
             DROP TABLE IF EXISTS averages_2022;
             CREATE TABLE averages_2022 AS
-            SELECT * FROM read_csv("./2022_averages.csv")
+            SELECT * FROM read_csv("./data/2022_averages.csv")
         """)
         logging.info("Successfully loaded 2022 averages.")
+        print("All done.")
 
 
     except Exception as e:
