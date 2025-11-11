@@ -49,6 +49,75 @@ def states():
 
         st.plotly_chart(fig, use_container_width=True)
 
+        # ******************************
+
+        # pull tables for each year  
+        df18 = con.execute(f"""
+            SELECT * FROM averages_2018;
+        """).fetchdf()
+        df19 = con.execute(f"""
+            SELECT * FROM averages_2019;
+        """).fetchdf()
+        df20 = con.execute(f"""
+            SELECT * FROM averages_2020;
+        """).fetchdf()
+        df21 = con.execute(f"""
+            SELECT * FROM averages_2021;
+        """).fetchdf()
+        df22 = con.execute(f"""
+            SELECT * FROM averages_2022;
+        """).fetchdf()
+
+        # display number of test takers for each interval 
+        st.divider() 
+
+        st.markdown("Distribution of Test Takers Across Different Score Intervals")
+
+        # show bar chart for each year 
+        df18_s = df18[(df18["State"] == selected_state)]
+        df19_s = df19[(df19["State"] == selected_state)]
+        df20_s = df20[(df20["State"] == selected_state)]
+        df21_s = df21[(df21["State"] == selected_state)]
+        df22_s = df22[(df22["State"] == selected_state)]
+
+
+        lc, rc = st.columns(2)
+        with lc:
+            fig = go.Figure( 
+                data=[go.Bar(
+                    x=df18_s["Total Score Interval"], y=df18_s["Total"])]) 
+            fig.update_layout(title=f'Total Score Intervals for {selected_state} in 2018')
+            st.plotly_chart(fig, use_container_width=False)
+
+            fig = go.Figure( 
+                data=[go.Bar(
+                    x=df20_s["Total Score Interval"], y=df20_s["Total"])]) 
+            fig.update_layout(title=f'Total Score Intervals for {selected_state} in 2020')
+            st.plotly_chart(fig, use_container_width=False)
+
+            fig = go.Figure( 
+                data=[go.Bar(
+                    x=df22_s["Total Score Interval"], y=df22_s["Total"])]) 
+            fig.update_layout(title=f'Total Score Intervals for {selected_state} in 2022')
+            st.plotly_chart(fig, use_container_width=True)
+
+        with rc:
+            fig = go.Figure( 
+                data=[go.Bar(
+                    x=df19_s["Total Score Interval"], y=df19_s["Total"])]) 
+            fig.update_layout(title=f'Total Score Intervals for {selected_state} in 2019')
+            st.plotly_chart(fig, use_container_width=False)
+
+            fig = go.Figure( 
+                data=[go.Bar(
+                    x=df21_s["Total Score Interval"], y=df21_s["Total"])]) 
+            fig.update_layout(title=f'Total Score Intervals for {selected_state} in 2021')
+            st.plotly_chart(fig, use_container_width=False)
+
+            
+
+
+
         
     except Exception as e:
         print(f"An error occurred: {e}")
