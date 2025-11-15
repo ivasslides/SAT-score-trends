@@ -51,7 +51,7 @@ def states():
 
         # ******************************
 
-        # pull tables for each year  
+        # pull average table for each year  
         df18 = con.execute(f"""
             SELECT * FROM averages_2018;
         """).fetchdf()
@@ -80,37 +80,38 @@ def states():
         df21_s = df21[(df21["State"] == selected_state)]
         df22_s = df22[(df22["State"] == selected_state)]
 
-
+        # reference this color list for each year from the Home page 
+        #colors = ['lightblue', 'lightgreen', 'orchid', 'lightpink', 'lightgray']
         lc, rc = st.columns(2)
         with lc:
             fig = go.Figure( 
                 data=[go.Bar(
-                    x=df18_s["Total Score Interval"], y=df18_s["Total"])]) 
+                    x=df18_s["Total Score Interval"], y=df18_s["Total"], marker_color='lightblue')]) 
             fig.update_layout(title=f'Total Score Intervals for {selected_state} in 2018')
             st.plotly_chart(fig, use_container_width=False)
 
             fig = go.Figure( 
                 data=[go.Bar(
-                    x=df20_s["Total Score Interval"], y=df20_s["Total"])]) 
+                    x=df20_s["Total Score Interval"], y=df20_s["Total"], marker_color='lightgreen')]) 
             fig.update_layout(title=f'Total Score Intervals for {selected_state} in 2020')
             st.plotly_chart(fig, use_container_width=False)
 
             fig = go.Figure( 
                 data=[go.Bar(
-                    x=df22_s["Total Score Interval"], y=df22_s["Total"])]) 
+                    x=df22_s["Total Score Interval"], y=df22_s["Total"], marker_color='orchid')]) 
             fig.update_layout(title=f'Total Score Intervals for {selected_state} in 2022')
-            st.plotly_chart(fig, use_container_width=True)
+            st.plotly_chart(fig, use_container_width=False)
 
         with rc:
             fig = go.Figure( 
                 data=[go.Bar(
-                    x=df19_s["Total Score Interval"], y=df19_s["Total"])]) 
+                    x=df19_s["Total Score Interval"], y=df19_s["Total"], marker_color='lightpink')]) 
             fig.update_layout(title=f'Total Score Intervals for {selected_state} in 2019')
             st.plotly_chart(fig, use_container_width=False)
 
             fig = go.Figure( 
                 data=[go.Bar(
-                    x=df21_s["Total Score Interval"], y=df21_s["Total"])]) 
+                    x=df21_s["Total Score Interval"], y=df21_s["Total"], marker_color='lightgray')]) 
             fig.update_layout(title=f'Total Score Intervals for {selected_state} in 2021')
             st.plotly_chart(fig, use_container_width=False)
 

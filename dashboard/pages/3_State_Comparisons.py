@@ -24,16 +24,19 @@ def comps():
         # arkansas/cali/lousiana/ND/ not really increasing in 2022, 
         st.markdown("Some states, such as Arkansas, Louisiana, and North Dakota, didn't see a return to 'normal levels' of SAT participation in 2022.")
 
+        # use same colors as from Region Trends
+        colorss = ['rebeccapurple', 'mediumblue', 'deepskyblue', 'darkturquoise', 'lightseagreen']
+
         # create dataframe of just the selected state 
         non_inc_states = ['Arkansas', "Louisiana", "North Dakota"]
         dffn = df[(df["State"].isin(non_inc_states))]
 
         # make line chart
         fig = go.Figure()
-        for s in non_inc_states:
+        for i, s in enumerate(non_inc_states):
             sdata = dffn[dffn['State'] == s]
             fig.add_trace(go.Scatter(x=sdata["Year"], y=sdata["Total_Test_Takers"], 
-                mode='lines', name = s))
+                mode='lines', name = s, line = dict(color = colorss[i % len(colorss)])))
 
         # add titles
         fig.update_layout(
@@ -64,10 +67,10 @@ def comps():
 
         # make line chart
         fig2 = go.Figure()
-        for s in inc_states:
+        for i, s in enumerate(inc_states):
             sdata = dffi[dffi['State'] == s]
             fig2.add_trace(go.Scatter(x=sdata["Year"], y=sdata["Total_Test_Takers"], 
-                mode='lines', name = s))
+                mode='lines', name = s, line = dict(color = colorss[i % len(colorss)])))
 
         # add titles
         fig2.update_layout(
@@ -95,10 +98,10 @@ def comps():
 
         # make line chart
         fig3 = go.Figure()
-        for s in inc_states2:
+        for i, s in enumerate(inc_states2):
             sdata = dffi2[dffi2['State'] == s]
             fig3.add_trace(go.Scatter(x=sdata["Year"], y=sdata["Total_Test_Takers"], 
-                mode='lines', name = s))
+                mode='lines', name = s, line = dict(color = colorss[i % len(colorss)])))
 
         # add titles
         fig3.update_layout(
