@@ -6,7 +6,7 @@ import os
 def comps():
     con = None
 
-    DB_PATH = os.path.join(os.path.dirname(__file__), '..', 'sat_data.db')
+    DB_PATH = os.path.join(os.path.dirname(__file__), '../..', 'sat_data.db')
 
     try:
         con = duckdb.connect(database=DB_PATH, read_only=True)

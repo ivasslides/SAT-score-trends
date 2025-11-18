@@ -6,7 +6,7 @@ import os
 def regions():
     con = None
 
-    DB_PATH = os.path.join(os.path.dirname(__file__), '..', 'sat_data.db')
+    DB_PATH = os.path.join(os.path.dirname(__file__), '../..', 'sat_data.db')
 
     try:
         con = duckdb.connect(database=DB_PATH, read_only=True)
@@ -86,6 +86,7 @@ def regions():
 
         
     except Exception as e:
+        st.error(f"Error accessing database at: {DB_PATH}. Traceback: {e}")
         print(f"An error occurred: {e}")
 
 if __name__ == "__main__":
