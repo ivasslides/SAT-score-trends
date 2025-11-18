@@ -6,11 +6,12 @@ import os
 def comps():
     con = None
 
+    # make path to db based on current file path 
     DB_PATH = os.path.join(os.path.dirname(__file__), '../..', 'sat_data.db')
 
     try:
         con = duckdb.connect(database=DB_PATH, read_only=True)
-        st.success(f"Connection SUCCESS! Path checked: {DB_PATH}")
+        # st.success(f"Connection SUCCESS! Path checked: {DB_PATH}")
         print("Working!") 
 
         # pull total 
@@ -32,6 +33,9 @@ def comps():
         # create dataframe of just the selected state 
         non_inc_states = ['Arkansas', "Louisiana", "North Dakota"]
         dffn = df[(df["State"].isin(non_inc_states))]
+        
+        # create 3 columns, with second one biggets to display graph centered 
+        col11, col21, col31 = st.columns([1,3,1])
 
         # make line chart
         fig = go.Figure()
@@ -40,6 +44,16 @@ def comps():
             fig.add_trace(go.Scatter(x=sdata["Year"], y=sdata["Total_Test_Takers"], 
                 mode='lines', name = s, line = dict(color = colorss[i % len(colorss)])))
 
+        # adding vertical line at Year 2020 to signal start of pandemic, and emphasizing the drop
+        fig.add_vline(
+            x=2020, 
+            line_width=2, 
+            line_dash="dash", 
+            line_color="red",
+            annotation_text="Start of pandemic",
+            annotation_position="top right",
+            annotation_font_color="red")
+        
         # add titles
         fig.update_layout(
             title = "Certain states do not return to normal levels of SAT participation after the COVID-19 pandemic", 
@@ -54,12 +68,18 @@ def comps():
             ticktext = ["2018", "2019", "2020", "2021", "2022"],
             range = [2017.9, 2022.2]
         )
-        st.plotly_chart(fig, use_container_width=True)
+        col21.plotly_chart(fig, width='stretch')
+
+        st.divider() 
+        st.write("\n ")
 
 
-        st.markdown("Some states, such as Colorado, Connecticut, Florida, Georgia, Idaho, Illinois, Iowa, New Mexico, Oklahoma, and Rhode Island, saw a return to 'normal levels' of SAT participation in 2022.")
-        st.markdown("Additionally, in some of the states, their levels of participation after the COVID-19 pandemic were higher than before the pandemic.")
+        # ********************************
+        st.markdown("Some states, such as Colorado, Connecticut, Florida, Georgia, Idaho, Illinois, Iowa, New Mexico, Oklahoma, and Rhode Island, saw a return to 'normal levels' of SAT participation in 2022. Additionally, in some of the states, their levels of participation after the COVID-19 pandemic were higher than before the pandemic.")
         
+        # making graph title from regular text 
+        st.markdown("**States with higher-than-normal levels of SAT participation after the COVID-19 pandemic.**")
+
         # create 2 columns to display plots side by side 
         col1, col2 = st.columns(2)
         
@@ -74,6 +94,16 @@ def comps():
             fig2.add_trace(go.Scatter(x=sdata["Year"], y=sdata["Total_Test_Takers"], 
                 mode='lines', name = s, line = dict(color = colorss[i % len(colorss)])))
 
+        # adding vertical line at Year 2020 to signal start of pandemic, and emphasizing the drop
+        fig2.add_vline(
+            x=2020, 
+            line_width=2, 
+            line_dash="dash", 
+            line_color="red",
+            annotation_text="Start of pandemic",
+            annotation_position="top right",
+            annotation_font_color="red")
+        
         # add titles
         fig2.update_layout(
             xaxis_title = "Year",
@@ -92,7 +122,7 @@ def comps():
             ticktext = ['25k', '50k', '75k', '100k', '125k', '150k', '175k', '200k'],
             range = [24000, 201000]
         )
-        col1.plotly_chart(fig2, use_container_width=True)
+        col1.plotly_chart(fig2, width='stretch')
 
         # second plot 
         inc_states2 = [ "Idaho", "Iowa", "New Mexico", "Oklahoma", "Rhode Island"]
@@ -105,6 +135,16 @@ def comps():
             fig3.add_trace(go.Scatter(x=sdata["Year"], y=sdata["Total_Test_Takers"], 
                 mode='lines', name = s, line = dict(color = colorss[i % len(colorss)])))
 
+        # adding vertical line at Year 2020 to signal start of pandemic, and emphasizing the drop
+        fig3.add_vline(
+            x=2020, 
+            line_width=2, 
+            line_dash="dash", 
+            line_color="red",
+            annotation_text="Start of pandemic",
+            annotation_position="top right",
+            annotation_font_color="red")
+        
         # add titles
         fig3.update_layout(
             xaxis_title = "Year",
@@ -123,7 +163,7 @@ def comps():
             ticktext = ['2.5k', '5k', '7.5k', '10k', '12.5k', '15k', '17.5k', '20k'],
             range = [2400, 22500]
         )
-        col2.plotly_chart(fig3, use_container_width=True)
+        col2.plotly_chart(fig3, width='content')
 
         
     except Exception as e:

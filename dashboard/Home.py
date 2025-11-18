@@ -9,15 +9,17 @@ import os # Import the os module
 # table showing total number of test takers for each region, per year 
 def homes():
     con = None
-
+    
+    # make path to db based on current file path 
     DB_PATH = os.path.join(os.path.dirname(__file__), '..', 'sat_data.db')
 
     try:
         con = duckdb.connect(database=DB_PATH, read_only=True)
-        st.success(f"Connection SUCCESS! Path checked: {DB_PATH}") 
-        # create and verify connection 
-        # con = duckdb.connect(database='../sat_data.db', read_only=True) 
-        # st.success("Successfully connected to the database!")
+        # st.success(f"Connection SUCCESS! Path checked: {DB_PATH}") 
+        print("Working!") 
+
+        st.set_page_config(layout="wide")
+
         # making title
         st.title("SAT Trends in the US")
 
@@ -49,7 +51,7 @@ def homes():
         df_pivot = df_pivot.map(lambda x: f"{int(x):,}")
 
         # list of colors 
-        colors = ['lightblue', 'lightgreen', 'orchid', 'lightpink', 'lightgray']
+        colors = ['lightblue', 'lightgreen', 'orchid', 'lightpink', 'yellow']
         # using lambda function to apply different color to each column, aka each year 
         styled_df = df_pivot.style.apply(
             lambda col: ['background-color: {}'.format(colors[i % len(colors)]) for i in range(len(col))],
@@ -69,8 +71,6 @@ def homes():
 
     except Exception as e:
         st.error(f"Error accessing database at: {DB_PATH}. Traceback: {e}") 
-        # The Streamlit Cloud logs will show the exact DB_PATH being checked.
-
         # print(f"An error occurred: {e}")
 
 if __name__ == "__main__":
