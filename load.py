@@ -57,9 +57,9 @@ def convert_to_csv():
             try: 
                 # pull tables from pdf, 2022 gets page 7 
                 if yr == 2022: 
-                    t = camelot.read_pdf(f, pages='7', flavor="stream")
+                   t = camelot.read_pdf(f, pages='7', flavor="stream")
                 else: 
-                    t = camelot.read_pdf(f, pages='5', flavor="stream")
+                   t = camelot.read_pdf(f, pages='5', flavor="stream")
                 logging.info(f"{state} {yr} table: {len(t)}")
                 # keep only first table in df
                 df = t[0].df
