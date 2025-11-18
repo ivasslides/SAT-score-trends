@@ -1,13 +1,16 @@
 import streamlit as st
 import plotly.graph_objects as go
 import duckdb
+import os 
 
 def comps():
     con = None
 
-    try: 
-        # create and verify connection 
-        con = duckdb.connect(database='../../sat_data.db', read_only=True) 
+    DB_PATH = os.path.join(os.path.dirname(__file__), '..', 'sat_data.db')
+
+    try:
+        con = duckdb.connect(database=DB_PATH, read_only=True)
+        st.success(f"Connection SUCCESS! Path checked: {DB_PATH}")
         print("Working!") 
 
         # pull total 

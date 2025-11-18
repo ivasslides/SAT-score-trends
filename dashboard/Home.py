@@ -3,15 +3,21 @@ import duckdb
 
 # in terminal, in dashboard dir : streamlit run Home.py
 
+import os # Import the os module
+
 
 # table showing total number of test takers for each region, per year 
 def homes():
     con = None
 
-    try: 
+    DB_PATH = os.path.join(os.path.dirname(__file__), '..', 'sat_data.db')
+
+    try:
+        con = duckdb.connect(database=DB_PATH, read_only=True)
+        st.success(f"Connection SUCCESS! Path checked: {DB_PATH}") 
         # create and verify connection 
-        con = duckdb.connect(database='../sat_data.db', read_only=True) 
-        st.success("Successfully connected to the database!")
+        # con = duckdb.connect(database='../sat_data.db', read_only=True) 
+        # st.success("Successfully connected to the database!")
         # making title
         st.title("SAT Trends in the US")
 
@@ -56,18 +62,16 @@ def homes():
         # 
 
         st.write("\n \n \n \n ")
-
-
-
         # display imge 
         st.image('https://inside.nku.edu/content/inside/testing/tests/entrance-exam/SAT/_jcr_content/par/columncontrol/column-2/textimage/image.img.jpg/1763587190.jpg', width = 'stretch')
-
-
 
         print("Working!") 
 
     except Exception as e:
-        print(f"An error occurred: {e}")
+        st.error(f"Error accessing database at: {DB_PATH}. Traceback: {e}") 
+        # The Streamlit Cloud logs will show the exact DB_PATH being checked.
+
+        # print(f"An error occurred: {e}")
 
 if __name__ == "__main__":
     homes()
