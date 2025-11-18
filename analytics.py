@@ -88,6 +88,9 @@ def analytics():
         """)
         logging.info("State abbrs and regions added.")
 
+        con.close()
+        
+
 
     except Exception as e:
         logger.error(f"An error occurred: {e}")

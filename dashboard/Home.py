@@ -11,7 +11,7 @@ def homes():
 
     try: 
         # create and verify connection 
-        con = duckdb.connect(database='/home/ivasslides/SAT-score-trends/sat_data.db', read_only=True) 
+        con = duckdb.connect(database='../sat_data.db', read_only=True) 
 
         # making title
         st.title("SAT Trends in the US")

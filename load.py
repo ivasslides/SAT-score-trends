@@ -197,6 +197,8 @@ def upload():
         logging.info("Successfully loaded 2022 averages.")
         print("All done.")
 
+        con.close() 
+
 
     except Exception as e:
         logger.error(f"An error occurred: {e}")
