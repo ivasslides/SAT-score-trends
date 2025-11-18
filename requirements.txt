@@ -6,6 +6,5 @@ glob
 os
 pandas 
 numpy 
-duckdb
 plotly.graph_objects
 matplotlib.pyplot
