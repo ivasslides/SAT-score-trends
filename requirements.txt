@@ -2,7 +2,6 @@ streamlit
 pandas
 numpy
 requests
-duckdb 
-camelot-py
+duckdb
 matplotlib
 plotly 
