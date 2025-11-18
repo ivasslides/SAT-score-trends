@@ -1,6 +1,5 @@
 import streamlit as st 
 import duckdb
-import pandas as pd
 
 # in terminal, in dashboard dir : streamlit run Home.py
 
@@ -12,7 +11,7 @@ def homes():
     try: 
         # create and verify connection 
         con = duckdb.connect(database='../sat_data.db', read_only=True) 
-
+        st.success("Successfully connected to the database!")
         # making title
         st.title("SAT Trends in the US")
 
@@ -31,7 +30,7 @@ def homes():
         st.markdown("To gain a quick overview of SAT participation and score trends in the US, below is a table summarizing the total number of test takers for each region over time.")
         
         # aggregate by region and year to create dataframe  
-        df = con.execute(f"""
+        df = con.sql(f"""
             SELECT Year, Region, SUM("Total_Test_Takers") AS Totals
             FROM total_test_takers
             GROUP BY Year, Region

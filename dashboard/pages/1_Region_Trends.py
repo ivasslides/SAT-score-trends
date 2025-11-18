@@ -1,7 +1,5 @@
 import streamlit as st
 import plotly.graph_objects as go
-import matplotlib.pyplot as plt
-import pandas as pd
 import duckdb
 
 def regions():
@@ -13,7 +11,7 @@ def regions():
         print("Working!") 
 
         # pull total 
-        df = con.execute(f"""
+        df = con.sql(f"""
             SELECT * FROM total_test_takers;
         """).fetchdf()
 

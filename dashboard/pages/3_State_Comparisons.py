@@ -1,6 +1,5 @@
 import streamlit as st
 import plotly.graph_objects as go
-import pandas as pd
 import duckdb
 
 def comps():
@@ -12,7 +11,7 @@ def comps():
         print("Working!") 
 
         # pull total 
-        df = con.execute(f"""
+        df = con.sql(f"""
             SELECT * FROM total_test_takers;
         """).fetchdf()
 
