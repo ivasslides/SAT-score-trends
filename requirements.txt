@@ -1,0 +1,11 @@
+streamlit
+requests
+time
+camelot
+glob 
+os
+pandas 
+numpy 
+duckdb
+plotly.graph_objects
+matplotlib.pyplot

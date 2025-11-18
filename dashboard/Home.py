@@ -56,6 +56,10 @@ def homes():
         # *************************************
         # 
 
+        st.write("\n \n \n \n ")
+
+
+
         # display imge 
         st.image('https://inside.nku.edu/content/inside/testing/tests/entrance-exam/SAT/_jcr_content/par/columncontrol/column-2/textimage/image.img.jpg/1763587190.jpg', width = 'stretch')
 
