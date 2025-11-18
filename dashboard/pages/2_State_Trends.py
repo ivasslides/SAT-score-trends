@@ -7,7 +7,7 @@ def states():
 
     try: 
         # create and verify connection 
-        con = duckdb.connect(database='../sat_data.db', read_only=True) 
+        con = duckdb.connect(database='../../sat_data.db', read_only=True) 
         print("Working!") 
 
         # pull total 
